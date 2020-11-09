@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-areas: 
+      "header header header"
+      "user-info main ad-space";
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 80px 1fr;
+    row-gap: 10px;
+    column-gap: 15px;
+  }
+  
+  header {
+    grid-area: header;
+    border: 2px solid red;
+  }
+  
+  main {
+    grid-area: main;
+    border: 2px solid blue;
+  }
+  
+  #user-info {
+    grid-area: user-info;
+    border: 2px solid green;
+  }
+
+  #ad-space {
+    grid-area: ad-space;
+    border: 2px solid green;
+  }
