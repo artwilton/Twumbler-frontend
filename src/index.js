@@ -118,7 +118,7 @@ const createPostFetch = (title, content) => {
 
 // User can edit their post (show that it was edited) PATCH request
 div.addEventListener("click", event => {
-  console.log('You clicked me')
+  // console.log('You clicked me')
   const card = event.target.parentElement
   const postId = card.dataset.id
   
@@ -151,10 +151,52 @@ const editPostForm = (card) => {
   `
   card.innerHTML = ""
   card.append(form)
+  cardEdit(card)
   
 }
-// Grab the value 
+// Grab the value
+const cardEdit = (card) => {
+  card.addEventListener("submit", event => {
+    event.preventDefault()
+    // console.log('Meeeeeeee')
+    editPost(event)
+  })
+}
 // Use to update database
+const editPost = (event) => {
+  const title = event.target.title.value
+  const content = event.target.content.value
+  const card = event.target.parentElement
+  const postId = card.dataset.id
+
+  // console.log(postId)
+  
+  editPostFetch(title, content, postId, card)
+}
+
+const editPostFetch = (title, content, postId, card) => {
+  const configObj = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: title,
+      content: content
+    })
+  }
+  // Add to database (CREATE)
+  fetch(`http://localhost:3000/api/v1/posts/${postId}`, configObj)
+  .then(r => r.json())
+  .then(post => {
+    console.log(post)
+    //Delete Form from card
+    card.innerHTML = ""
+    // Render post
+    createPostCard(post)
+
+  })
+}
 // Front End
 // Render post
 // Back End
