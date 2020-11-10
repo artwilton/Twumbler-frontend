@@ -1,4 +1,4 @@
-fetch("http://localhost:3000/api/v1/users/24")
+fetch("http://localhost:3000/api/v1/users/1")
   .then(r => r.json())
   .then(data => {
     renderUser(data)
@@ -6,17 +6,17 @@ fetch("http://localhost:3000/api/v1/users/24")
   })
 
 
-// fetch("http://localhost:3000/api/v1/users/24", {
-//   method: "PATCH",
-//   headers: {
-//     "Content-Type": "application/json"
-//   },
-//   body: JSON.stringify({ 
-//     name: "Cordelia Chases"
-//   })
-// })
-//   .then(r => r.json())
-//   .then(console.log)
+fetch("http://localhost:3000/api/v1/users/1", {
+  method: "PATCH",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({ 
+    name: "Cordelia Chases"
+  })
+})
+  .then(r => r.json())
+  .then(console.log)
 
 const renderUser = user => {
   // const userInfo = document.querySelector("#user-info")
@@ -45,7 +45,7 @@ const createPostCard = (post, postCards) => {
 
 const renderPosts = user => {
   const postCards = document.querySelector("main")
-  postCards.innerHTML = ""
+  // postCards.innerHTML = ""
 
   user.posts.forEach(post => {
     createPostCard(post, postCards)
