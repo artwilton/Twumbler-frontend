@@ -22,10 +22,16 @@
         <p id="user-bio">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident est sunt, repellat eaque, ratione omnis ullam ipsum eum reprehenderit quam culpa distinctio dolores nisi totam doloribus quas ex, odit eos!</p>
       </div>
       <main>
-        <div>
-          <textarea>Insert Content Here</textarea>
-          <button id="new-post-button">New Post</button>
-        </div>
+        <form id="post-form">
+          <fieldset>
+            <legend>Personalia:</legend>
+            <label for="fname">Post Title:</label><br>
+            <input type="text" id="fname" name="fname" value="Post Title"><br>
+            <textarea name="message" rows="10" cols="30" value="">             
+            </textarea> 
+            <input type="submit" value="Submit">
+          </fieldset>
+        </form> 
       </main>
       <div id="ad-space">
         <img src="https://pbs.twimg.com/media/EMzpogUWwAE83BL?format=png&name=360x360" alt="Ad Space" style="max-width: 200px;" /><br>
