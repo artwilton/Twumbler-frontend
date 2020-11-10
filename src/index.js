@@ -117,8 +117,42 @@ const createPostFetch = (title, content) => {
 
 
 // User can edit their post (show that it was edited) PATCH request
-const cards = document.querySelectorAll(".cards")
-console.log(cards)
+div.addEventListener("click", event => {
+  console.log('You clicked me')
+  const card = event.target.parentElement
+  const postId = card.dataset.id
+  
+  if (event.target.matches('.edit')) {
+    editPostForm(card)
+  }
+
+  if (event.target.matches('.delete')) {
+    // deletePost(event, postId, card)
+  }
+})
+//a form replaces the card with title and content
+const editPostForm = (card) => {
+  const title = card.querySelector('h3').innerText
+  const content = card.querySelector('p').textContent
+  const form = document.createElement('form')
+
+  form.innerHTML = `
+  <form id="post-edit-form">
+          <fieldset>
+            <legend>Edit Post:</legend>
+            <label for=title>Title:</label><br>
+            <textarea name=title>${title}</textarea><br>
+            <label for=content>Content:</label><br>
+            <textarea name=content>
+              ${content}             
+            </textarea> 
+            <input type=submit value=Submit>
+          </fieldset>
+  `
+  card.innerHTML = ""
+  card.append(form)
+  
+}
 // Grab the value 
 // Use to update database
 // Front End
