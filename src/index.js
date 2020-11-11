@@ -1,4 +1,9 @@
-const currentUserId = 1
+let currentUserId = 1
+
+const userInfo = document.querySelector("#user-info")
+const userName = document.querySelector("#user-name")
+const userAge = document.querySelector("#user-age")
+const userBio = document.querySelector("#user-bio")
 
 window.addEventListener('DOMContentLoaded', (event) => {
   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`)
@@ -6,6 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     .then(data => {
       renderUser(data)
       renderPosts(data)
+      editUserEventHandler()
     })
 });
 
@@ -26,27 +32,89 @@ const updateUser = user => {
 
 // User Helper Methods
 
+
 const renderUser = user => {
-  const userInfo = document.querySelector("#user-info")
-
-  const name = document.querySelector("#user-name")
-  name.textContent = user.name
-
-  const age = document.querySelector("#user-age")
-  age.textContent = user.age
-
-  const bio = document.querySelector("#user-bio")
-  bio.textContent = user.bio
-
+  userName.textContent = user.name
+  userAge.textContent = user.age
+  userBio.textContent = user.bio
   userInfo.dataset.id = user.id
-
+  currentUserId = user.id
 }
+
+const editUserForm = () => {
+
+  const form = document.createElement('form')
+  form.innerHTML = `
+  <form id="user-edit-form">
+  <fieldset>
+  <legend>Edit User:</legend>
+  <label for=name>Name:</label><br>
+  <textarea name=name>${userName.textContent}</textarea><br>
+  <label for=age>Age:</label><br>
+  <textarea name=age>${userAge.textContent}</textarea><br>
+  <label for=bio>Bio:</label><br>
+  <textarea name=bio>${userBio.textContent}</textarea> 
+  <input type=submit value=Submit>
+  </fieldset>
+  `
+  
+  userInfo.querySelector('.edit').style.display = 'none'
+  userInfo.querySelectorAll('p').forEach(p => {
+    p.style.display = 'none'
+  });
+  userInfo.append(form)
+  userInfoEdit(userInfo)
+  
+}
+
+const userInfoEdit = (userInfo) => {
+  userInfo.addEventListener("submit", event => {
+    event.preventDefault()
+    editUser(event)
+  })
+}
+
+
+const editUser = (event) => {
+
+  const name = event.target.name.value
+  const age = event.target.age.value
+  const bio = event.target.bio.value
+
+  let userObj = {name, age, bio}
+  
+  editUserFetch(userObj)
+}
+
+const editUserFetch = (userObj) => {
+  const configObj = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userObj)
+  }
+  // Add to database (CREATE)
+  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
+  .then(r => r.json())
+  .then(user => {
+
+    renderUser(user)
+    userInfo.querySelector('.edit').style.display = ''
+    userInfo.querySelectorAll('p').forEach(p => {
+      p.style.display = ''
+    });
+    userInfo.querySelector('form').remove()
+    
+  })
+}
+
 
 const main = document.querySelector("main")
 const div = document.createElement('div')
-div.id = 'posts'
 
 // Post Helper Methods
+div.id = 'posts'
 const createPostCard = (post) => {
 
   const card = document.createElement("card")
@@ -63,8 +131,6 @@ const createPostCard = (post) => {
   main.append(div)
 }
 
-
-
 const renderPosts = user => {
 
   user.posts.forEach(post => {
@@ -74,6 +140,17 @@ const renderPosts = user => {
 
 const postForm = document.querySelector('#post-form')
 console.log(postForm)
+
+// Event Listeners
+
+  // User Event Listener
+const editUserEventHandler = () => {
+  userInfo.addEventListener('click', event => {
+    if (event.target.matches('.edit')) {
+      editUserForm()
+    }
+  })
+}
 
 
 
@@ -143,9 +220,7 @@ const editPostForm = (card) => {
             <label for=title>Title:</label><br>
             <textarea name=title>${title}</textarea><br>
             <label for=content>Content:</label><br>
-            <textarea name=content>
-              ${content}             
-            </textarea> 
+            <textarea name=content>${content}</textarea> 
             <input type=submit value=Submit>
           </fieldset>
   `
