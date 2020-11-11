@@ -1,4 +1,4 @@
-let currentUserId = 1
+let currentUserId = 5
 
 const userInfo = document.querySelector("#user-info")
 const userName = document.querySelector("#user-name")
@@ -6,6 +6,13 @@ const userAge = document.querySelector("#user-age")
 const userBio = document.querySelector("#user-bio")
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  initUser()
+});
+
+
+//
+
+const initUser = () => {
   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`)
     .then(r => r.json())
     .then(data => {
@@ -13,7 +20,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       renderPosts(data)
       editUserEventHandler()
     })
-});
+}
+
+// init()
 
 // Fetch
 const updateUser = user => {
@@ -30,16 +39,30 @@ const updateUser = user => {
     .then(console.log)
 }
 
+const deleteUser = () => {
+  const configObj = {
+    method: "DELETE",
+  }
+  // Add to database (CREATE)
+  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
+
+  currentUserId += 1
+  initUser()
+}
+
 // User Helper Methods
 
 
 const renderUser = user => {
+
   userName.textContent = user.name
   userAge.textContent = user.age
   userBio.textContent = user.bio
   userInfo.dataset.id = user.id
   currentUserId = user.id
 }
+
+
 
 const editUserForm = () => {
 
@@ -58,7 +81,7 @@ const editUserForm = () => {
   </fieldset>
   `
   
-  userInfo.querySelector('.edit').style.display = 'none'
+  userInfo.querySelector('button').style.display = 'none'
   userInfo.querySelectorAll('p').forEach(p => {
     p.style.display = 'none'
   });
@@ -132,7 +155,7 @@ const createPostCard = (post) => {
 }
 
 const renderPosts = user => {
-
+  div.innerHTML = ""
   user.posts.forEach(post => {
     createPostCard(post)
   })
@@ -148,11 +171,17 @@ const editUserEventHandler = () => {
   userInfo.addEventListener('click', event => {
     if (event.target.matches('.edit')) {
       editUserForm()
-    }
+    } 
+    if (event.target.matches('.delete')) {
+      if (confirm('Are you sure you want to delete your account?')) {
+        deleteUser()
+        console.log('User was removed from the database.');
+      } else {
+        console.log('User was not removed from the database.');
+      }
+    } 
   })
 }
-
-
 
 //------------ Make POST request for a new post, update in comments board ------------//
 // Add Event Handler for Submit
@@ -160,6 +189,7 @@ postForm.addEventListener("submit", event => {
   event.preventDefault()
   // console.log('You clicked Submit')
   createNewPost(event)
+  postForm.reset()
 })
 // Grab textarea.value
 const createNewPost = (event) => {
@@ -204,9 +234,28 @@ div.addEventListener("click", event => {
   }
 
   if (event.target.matches('.delete')) {
-    // deletePost(event, postId, card)
+    // console.log("I am delete")
+    if (confirm('Are you sure you want to delete this post?')) {
+      deletePost(postId, card)
+      console.log('Post was removed from the database.');
+    } else {
+      console.log('Post was not removed from the database.');
+    }
   }
 })
+
+// User can delete their post
+const deletePost = (postId, card) => {
+  const configObj = {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json"}
+  }
+  
+  fetch(`http://localhost:3000/api/v1/posts/${postId}`, configObj)
+  .then(card.remove())
+}
+
+
 //a form replaces the card with title and content
 const editPostForm = (card) => {
   const title = card.querySelector('h3').innerText
@@ -260,7 +309,7 @@ const editPostFetch = (title, content, postId, card) => {
       content: content
     })
   }
-  // Add to database (CREATE)
+  // Add to database
   fetch(`http://localhost:3000/api/v1/posts/${postId}`, configObj)
   .then(r => r.json())
   .then(post => {
@@ -272,10 +321,5 @@ const editPostFetch = (title, content, postId, card) => {
 
   })
 }
-// Front End
-// Render post
-// Back End
-// Grab info
-// Add to database (PATCH)
 
 
