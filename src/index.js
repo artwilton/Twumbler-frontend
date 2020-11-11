@@ -1,4 +1,4 @@
-let currentUserId = 5
+let currentUserId = 1
 
 const userInfo = document.querySelector("#user-info")
 const userName = document.querySelector("#user-name")
@@ -25,19 +25,20 @@ const initUser = () => {
 // init()
 
 // Fetch
-const updateUser = user => {
-  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ 
-      name: "Cordelia Chases"
-    })
-  })
-    .then(r => r.json())
-    .then(console.log)
-}
+
+// const updateUser = user => {
+//   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({ 
+//       name: "Cordelia Chases"
+//     })
+//   })
+//     .then(r => r.json())
+//     .then(console.log)
+// }
 
 const deleteUser = () => {
   const configObj = {
