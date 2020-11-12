@@ -3,8 +3,8 @@ body {
     padding: 0;
     display: grid;
     grid-template-areas: 
-      "header header header"
-      "user-info main ad-space";
+      "header header header header"
+      "user-info main main ad-space";
     grid-template-columns: 300px 1fr;
     grid-template-rows: 80px 1fr;
     row-gap: 10px;
@@ -13,20 +13,24 @@ body {
   
   header {
     grid-area: header;
-    border: 2px solid red;
+    /* border: 2px solid red; */
   }
   
   main {
     grid-area: main;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
   }
   
   #user-info {
     grid-area: user-info;
-    border: 2px solid green;
+    /* border: 2px solid green; */
   }
 
   #ad-space {
     grid-area: ad-space;
-    border: 2px solid green;
+    /* border: 2px solid green; */
+  }
+
+  .edit {
+    /* color: blue; */
   }

@@ -1,4 +1,4 @@
-let currentUserId = 1
+let currentUserId = 5
 
 const userInfo = document.querySelector("#user-info")
 const userName = document.querySelector("#user-name")
@@ -142,11 +142,16 @@ div.id = 'posts'
 const createPostCard = (post) => {
 
   const card = document.createElement("card")
+  card.className = 'card'
   card.innerHTML = `
-  <h3>${post.title}</h3>  
-  <p>${post.content}</p>
-  <button class=edit>Edit</button>
-  <button class=delete>Delete</button>
+  <br>
+    <div class=card>
+      <h3 class=card-header>${post.title}</h3>  
+      <p class=card-body>${post.content}</p>
+      <button class=edit>Edit</button>
+      <button class=delete>Delete</button>
+    </div>
+  <br>
   `
   card.dataset.id = post.id
   card.className = 'cards'
