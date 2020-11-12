@@ -2,49 +2,44 @@
 
 
 body {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-areas: 
-      "header header header "
-      "user-info main main ";
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 80px 1fr;
-    row-gap: 10px;
-    column-gap: 15px;
-  }
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-areas: 
+    "header header header "
+    "user-info main main ";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 80px 1fr;
+  row-gap: 10px;
+  column-gap: 15px;
+}
   
-  header {
-    grid-area: header;
-    /* border: 2px solid red; */
-    
-  }
+header {
+  grid-area: header;
+  /* border: 2px solid red; */
   
-  main {
-    grid-area: main;
-    padding: 10px;
-    /* border: 2px solid blue; */
-  }
-  
-  #user-info {
-    grid-area: user-info;
-    padding: 10px;
-    /* text-align: center; */
-    /* border: 2px solid green; */
-    background-color: whitesmoke;
-    border-color: whitesmoke;
-  }
+}
 
-  #ad-space {
-    grid-area: ad-space;
-    padding: 10px;
-    /* border: 2px solid green; */
-  }
+main {
+  font-family: Bad Script;
+  grid-area: main;
+  padding: 10px;
+  /* border: 2px solid blue; */
+}
 
-button:hover {
+#user-info {
+  grid-area: user-info;
+  padding: 10px;
+  /* text-align: center; */
+  /* border: 2px solid green; */
   background-color: whitesmoke;
-  border: #e04b52 solid 1px;
-  color: #e04b52;
+  border-color: whitesmoke;
+}
+
+#ad-space {
+  grid-area: ad-space;
+  padding: 10px;
+  /* border: 2px solid green; */
 }
 
 .container {
@@ -56,26 +51,31 @@ button:hover {
   /* opacity: .8; */
 }
 
-  .edit  {
-    /* color: blue; */
-  }
+.edit  {
+  background-color: rgb(181, 60, 192);
+  /* color: black;  */
+}
 
-  .btn {
-    /* width: 50%; */
-  }
+.edit:hover {
+  background-color: rgb(253, 4, 141);
+}
+
+.btn {
+  /* width: 50%; */
+}
 
 /* Style the counter cards */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
   padding: 16px;
+  /* transform: scale(.8); */
   text-align: center;
   /* background-color: #f1f1f1; */
 }
-
-  #posts {
-    /* width: 50%; */
-  }
-
-  .card {
-    /* border-color: white; */
-  }
+.col {
+  transform: scale(.95);
+}
+.col:hover{
+  transform: scale(1.00);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}

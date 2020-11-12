@@ -151,7 +151,7 @@ const createPostCard = (post) => {
   <br>
   `
   card.dataset.id = post.id
-  card.className = 'card col mb-4'
+  card.className = 'col mb-4 card'
 
   div.prepend(card)
   main.append(div)
@@ -325,4 +325,4 @@ const editPostFetch = (title, content, postId, card) => {
   })
 }
 
-
+renderFriends
