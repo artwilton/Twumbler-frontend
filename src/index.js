@@ -1,4 +1,4 @@
-let currentUserId = 5
+let currentUserId = 1
 
 const userInfo = document.querySelector("#user-info")
 const userName = document.querySelector("#user-name")
@@ -66,7 +66,10 @@ const renderUser = user => {
   userName.textContent = user.name
   userAge.textContent = user.age
   userBio.textContent = user.bio
+
   userInfo.dataset.id = user.id
+  userInfo.className = 'card'
+
   userProfilePhoto.src = `http://localhost:3000/${user.user_profile_photo}`
   currentUserId = user.id
 }
@@ -129,7 +132,7 @@ const createPostCard = (post) => {
   <br>
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
-      <button type=button class='edit'>Edit</button>
+      <button type=button class='edit btn btn-primary'>Edit</button>
       <button type=button class='delete btn btn-danger'>Delete</button>
   <br>
   `
