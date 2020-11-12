@@ -145,12 +145,10 @@ const createPostCard = (post) => {
   card.className = 'card'
   card.innerHTML = `
   <br>
-    <div class=card>
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
-      <button class=edit>Edit</button>
-      <button class=delete>Delete</button>
-    </div>
+      <button class='edit btn btn-primary'>Edit</button>
+      <button class='delete btn btn-danger'>Delete</button>
   <br>
   `
   card.dataset.id = post.id
