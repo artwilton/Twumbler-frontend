@@ -6,8 +6,23 @@ const userAge = document.querySelector("#user-age")
 const userBio = document.querySelector("#user-bio")
 const userProfilePhoto = document.querySelector("#user-profile-photo")
 
+let addPost = false;
+
 window.addEventListener('DOMContentLoaded', (event) => {
   initUser()
+  const addBtn = document.querySelector("#new-post-btn");
+  const postFormContainer = document.querySelector(".container");
+  addBtn.addEventListener("click", () => {
+    // hide & seek with the form
+    addPost = !addPost;
+    if (addPost) {
+      postFormContainer.style.display = "block";
+      addBtn.textContent = "Hide Form"
+    } else {
+      postFormContainer.style.display = "none";
+      addBtn.textContent = "Create A New Post"
+    }
+  });
 });
 
 
@@ -205,6 +220,8 @@ const createPostFetch = (title, content) => {
   .then(r => r.json())
   .then(post => {
     console.log(post)
+    //hide form
+    addPost = false
     // Render post
     createPostCard(post)
   })

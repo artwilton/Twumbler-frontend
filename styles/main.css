@@ -41,6 +41,21 @@ body {
     /* border: 2px solid green; */
   }
 
+button:hover {
+  background-color: whitesmoke;
+  border: #e04b52 solid 1px;
+  color: #e04b52;
+}
+
+.container {
+  padding: 1rem;
+  width: stretch;
+  height: auto;
+  display: none;
+  /* background: #515DA2; */
+  /* opacity: .8; */
+}
+
   .edit  {
     /* color: blue; */
   }
