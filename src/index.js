@@ -46,9 +46,10 @@ const editUserFetch = (userObj) => {
   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
   .then(r => r.json())
   .then(user => {
+    // console.log(user)
 
     renderUser(user)
-    userInfo.querySelector('.edit').style.display = ''
+    userInfo.querySelector('button').style.display = ''
     userInfo.querySelectorAll('p').forEach(p => {
       p.style.display = ''
     });
@@ -104,7 +105,6 @@ const userInfoEdit = (userInfo) => {
   })
 }
 
-
 const editUser = (event) => {
 
   const name = event.target.name.value
@@ -157,16 +157,40 @@ const editUserEventHandler = () => {
   userInfo.addEventListener('click', event => {
     if (event.target.matches('.edit')) {
       editUserForm()
-    } 
-    if (event.target.matches('.delete')) {
-      if (confirm('Are you sure you want to delete your account?')) {
-        deleteUser()
-        console.log('User was removed from the database.');
-      } else {
-        console.log('User was not removed from the database.');
-      }
-    } 
+    } else if (event.target.matches('.delete')) {
+        if (confirm('Are you sure you want to delete your account?')) {
+          deleteUser()
+          console.log('User was removed from the database.');
+        } else {
+          console.log('User was not removed from the database.');
+        }
+    } else if (event.target.matches('.edit-profile-photo')) {
+      
+      console.log('change user photo')
+      editProfilePhoto()
+    }
   })
+}
+
+const editProfilePhoto = () => {
+
+  const fileField = document.querySelector('input[type="file"]');
+  console.log(fileField.files[0])
+
+
+  
+  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, {
+    method: 'PUT',
+    body: ({profile_photo: fileField.files[0]})
+    
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log('Success:', result);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });  
 }
 
 //------------ Make POST request for a new post, update in comments board ------------//
