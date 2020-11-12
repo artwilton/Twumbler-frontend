@@ -12,16 +12,20 @@ body {
   grid-template-rows: 80px 1fr;
   row-gap: 10px;
   column-gap: 15px;
+  font: Amatic SC;
 }
   
-header {
+nav {
   grid-area: header;
   /* border: 2px solid red; */
-  
+}
+
+nav .btn {
+  outline-color: lightpink;
 }
 
 main {
-  font-family: Bad Script;
+  /* font: Amatic SC; */
   grid-area: main;
   padding: 10px;
   /* border: 2px solid blue; */
@@ -52,16 +56,16 @@ main {
 }
 
 .edit  {
-  background-color: rgb(181, 60, 192);
+  /* background-color: rgb(181, 60, 192); */
   /* color: black;  */
 }
 
 .edit:hover {
-  background-color: rgb(253, 4, 141);
+  background-color: lavender;
 }
 
-.btn {
-  /* width: 50%; */
+.delete:hover {
+  background-color: red;
 }
 
 /* Style the counter cards */
