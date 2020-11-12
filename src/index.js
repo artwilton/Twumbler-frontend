@@ -4,13 +4,14 @@ const userInfo = document.querySelector("#user-info")
 const userName = document.querySelector("#user-name")
 const userAge = document.querySelector("#user-age")
 const userBio = document.querySelector("#user-bio")
+const userProfilePhoto = document.querySelector("#user-profile-photo")
 
 window.addEventListener('DOMContentLoaded', (event) => {
   initUser()
 });
 
 
-//
+// Fetch
 
 const initUser = () => {
   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`)
@@ -21,24 +22,6 @@ const initUser = () => {
       editUserEventHandler()
     })
 }
-
-// init()
-
-// Fetch
-
-// const updateUser = user => {
-//   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({ 
-//       name: "Cordelia Chases"
-//     })
-//   })
-//     .then(r => r.json())
-//     .then(console.log)
-// }
 
 const deleteUser = () => {
   const configObj = {
@@ -51,19 +34,42 @@ const deleteUser = () => {
   initUser()
 }
 
+const editUserFetch = (userObj) => {
+  const configObj = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userObj)
+  }
+  // Add to database (CREATE)
+  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
+  .then(r => r.json())
+  .then(user => {
+
+    renderUser(user)
+    userInfo.querySelector('.edit').style.display = ''
+    userInfo.querySelectorAll('p').forEach(p => {
+      p.style.display = ''
+    });
+    userInfo.querySelector('form').remove()
+    
+  })
+}
+
 // User Helper Methods
 
-
 const renderUser = user => {
+
+  console.log(user)
 
   userName.textContent = user.name
   userAge.textContent = user.age
   userBio.textContent = user.bio
   userInfo.dataset.id = user.id
+  userProfilePhoto.src = `http://localhost:3000/${user.user_profile_photo}`
   currentUserId = user.id
 }
-
-
 
 const editUserForm = () => {
 
@@ -109,30 +115,6 @@ const editUser = (event) => {
   
   editUserFetch(userObj)
 }
-
-const editUserFetch = (userObj) => {
-  const configObj = {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(userObj)
-  }
-  // Add to database (CREATE)
-  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
-  .then(r => r.json())
-  .then(user => {
-
-    renderUser(user)
-    userInfo.querySelector('.edit').style.display = ''
-    userInfo.querySelectorAll('p').forEach(p => {
-      p.style.display = ''
-    });
-    userInfo.querySelector('form').remove()
-    
-  })
-}
-
 
 const main = document.querySelector("main")
 const div = document.createElement('div')
