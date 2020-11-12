@@ -220,8 +220,6 @@ const createPostFetch = (title, content) => {
   .then(r => r.json())
   .then(post => {
     console.log(post)
-    //hide form
-    addPost = false
     // Render post
     createPostCard(post)
   })
