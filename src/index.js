@@ -237,8 +237,10 @@ const createPostFetch = (title, content) => {
 // User can edit their post (show that it was edited) PATCH request
 div.addEventListener("click", event => {
   // console.log('You clicked me')
-  const card = event.target.parentElement
+  const card = event.target.closest('card')
+  // console.log(card)
   const postId = card.dataset.id
+  // console.log(postId)
   
   if (event.target.matches('.edit')) {
     editPostForm(card)

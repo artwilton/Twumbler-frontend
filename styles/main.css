@@ -68,6 +68,27 @@ main {
   background-color: red;
 }
 
+#new-post-btn {
+  background-color: lightpink;
+  /* text-color: black; */
+}
+
+#new-post-btn:hover {
+  background-color: grey;
+}
+
+.dropdown-toggle {
+  background-color: lightpink;
+}
+
+#post-form .btn {
+  background-color: lightpink;
+}
+
+#post-form .btn:hover {
+  background-color: grey;
+}
+
 /* Style the counter cards */
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
