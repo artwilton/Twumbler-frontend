@@ -63,7 +63,7 @@ const editUserFetch = (userObj) => {
   .then(user => {
 
     renderUser(user)
-    userInfo.querySelector('.edit').style.display = ''
+    userInfo.querySelector('button').style.display = ''
     userInfo.querySelectorAll('p').forEach(p => {
       p.style.display = ''
     });
@@ -147,9 +147,7 @@ const createPostCard = (post) => {
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
       <div class="btn-group dropleft">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Options
-        </button>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <button type=button class="edit btn btn-primary dropdown-item">Edit</button>
           <div class="dropdown-divider"></div>
