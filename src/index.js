@@ -124,12 +124,11 @@ const div = document.createElement('div')
 
 // Post Helper Methods
 div.id = 'posts'
+div.className = 'row row-cols-1 row-cols-md-2'
 const createPostCard = (post) => {
 
   const card = document.createElement("card")
-  card.className = 'card'
   card.innerHTML = `
-  <br>
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
       <button type=button class='edit btn btn-primary'>Edit</button>
@@ -137,7 +136,7 @@ const createPostCard = (post) => {
   <br>
   `
   card.dataset.id = post.id
-  card.className = 'cards'
+  card.className = 'card col mb-4'
 
   div.prepend(card)
   main.append(div)
@@ -304,7 +303,7 @@ const editPostFetch = (title, content, postId, card) => {
   .then(post => {
     console.log(post)
     //Delete Form from card
-    card.innerHTML = ""
+    card.remove()
     // Render post
     createPostCard(post)
 

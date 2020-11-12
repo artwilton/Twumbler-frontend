@@ -1,3 +1,6 @@
+
+
+
 body {
     margin: 0;
     padding: 0;
@@ -14,6 +17,7 @@ body {
   header {
     grid-area: header;
     /* border: 2px solid red; */
+    
   }
   
   main {
@@ -25,7 +29,10 @@ body {
   #user-info {
     grid-area: user-info;
     padding: 10px;
+    /* text-align: center; */
     /* border: 2px solid green; */
+    background-color: whitesmoke;
+    border-color: whitesmoke;
   }
 
   #ad-space {
@@ -38,6 +45,22 @@ body {
     /* color: blue; */
   }
 
-  .card {
+  .btn {
+    /* width: 50%; */
+  }
 
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  /* background-color: #f1f1f1; */
+}
+
+  #posts {
+    /* width: 50%; */
+  }
+
+  .card {
+    /* border-color: white; */
   }
