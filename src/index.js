@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   initLogin()
   logoutEventListender()
   searchEventListener()
+  boomerEventListener()
   // initUser()
 });
 
@@ -96,7 +97,7 @@ function searchEventListener() {
 
 function filterSearchResults(search) {
   console.log(search)
-  
+
 }
 
 // Fetch
@@ -578,3 +579,15 @@ const changeThemeToBlue = () => {
 
   }
 }
+
+function boomerEventListener() {
+
+  const boomer = document.querySelector('.boomer-theme')
+
+  boomer.addEventListener('click', event => {
+    document.body.classList.add("boomer-theme")
+    console.log('change to blue')
+  })
+}
+
+
