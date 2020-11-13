@@ -560,3 +560,21 @@ const closeComments = () => {
   postComments.innerHTML = ""
   closeCommentsBtn.innerHTML = ""
 }
+
+//--------***************CHANGE THEME******************--------//
+const theme = document.querySelector('.theme')
+const pink = document.querySelector('pink-theme')
+const blue = document.querySelector('blue-theme')
+
+blue.addEventListener("click", event => {
+  console.log(event.target)
+  changeThemeToBlue()
+})
+
+const changeThemeToBlue = () => {
+  const list = document.getElementsByClassName('btn');
+
+  for (let item of list) {
+
+  }
+}
