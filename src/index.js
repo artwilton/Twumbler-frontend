@@ -1,5 +1,12 @@
-let currentUserId = 1
+// define global variables
 
+let currentUserId = 1
+let addPost = false;
+let loggedIn = false;
+
+const main = document.querySelector("main")
+
+// User Info Elements
 const userInfo = document.querySelector("#user-info")
 const userInfoText = userInfo.querySelector('#user-info-text')
 const userName = document.querySelector("#user-name")
@@ -7,35 +14,104 @@ const userAge = document.querySelector("#user-age")
 const userBio = document.querySelector("#user-bio")
 const userProfilePhoto = document.querySelector("#user-profile-photo")
 
-let addPost = false;
+// Post Elements
 
+
+// DOM Content Loaded
 window.addEventListener('DOMContentLoaded', (event) => {
-  initUser()
-  const addBtn = document.querySelector("#new-post-btn");
-  const postFormContainer = document.querySelector(".container");
-  addBtn.addEventListener("click", () => {
-    // hide & seek with the form
-    addPost = !addPost;
-    if (addPost) {
-      postFormContainer.style.display = "block";
-      addBtn.textContent = "Hide Form"
-    } else {
-      postFormContainer.style.display = "none";
-      addBtn.textContent = "Create A New Post"
-    }
-  });
+  initLogin()
+  // initUser()
 });
 
 
+// Login 
+
+const initLogin = () => {
+  document.body.className = 'login-page'
+  renderLoginPage()
+  loginEventHandler()
+}
+
+function renderLoginPage() {
+
+  main.innerHTML = `
+    <form id="login-form">
+      <div class="form-group">
+        <label for="user-email">Email address</label>
+        <input type="email" class="form-control" name="email" id="user-email" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="user-password">Password</label>
+        <input type="password" class="form-control" id="user-password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  `
+
+}
+
+function loginEventHandler() {
+  document.querySelector('#login-form')
+  .addEventListener('submit', event => {
+    event.preventDefault()
+    getUserIdFromLogin(event.target.email.value)
+  })
+}
+
+function getUserIdFromLogin(email) {
+  fetch(`http://localhost:3000/api/v1/users/`)
+  .then(r => r.json())
+  .then(data => {
+    data.forEach(user => {
+      if (email === user.email) {
+        currentUserId = user.id
+      }
+    })
+    initUser()
+  })
+}
+
 // Fetch
 
-const initUser = () => {
-  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`)
+fetchUser = () => {
+  return fetch(`http://localhost:3000/api/v1/users/${currentUserId}`)
     .then(r => r.json())
+}
+
+renderPostEditForm = () => {
+  const postEditDiv = document.createElement('div')
+  postEditDiv.className = 'container'
+  postEditDiv.innerHTML = `
+  <form id="post-form">
+    <fieldset>
+      <legend>New Post</legend>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" style="width:50%">
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <textarea name="content" style="width:100%; height: 100px;" value=""></textarea> 
+      </div>
+      <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+  </form>    
+  `
+  main.prepend(postEditDiv)
+}
+
+const initUser = () => {
+    fetchUser()
     .then(data => {
+      loggedIn = !loggedIn
+      //re-render navbar to say "logout"
+      document.body.className = 'logged-in'
       renderUser(data)
       renderPosts(data)
       editUserEventHandler()
+      renderPostEditForm()
+      newPostEventListener()
+      document.querySelector('#login-form').remove()
     })
 }
 
@@ -47,7 +123,7 @@ const deleteUser = () => {
   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
 
   currentUserId += 1
-  initUser()
+  initLogin()
 }
 
 // User Helper Methods
@@ -109,7 +185,8 @@ const editUser = (event) => {
   editProfilePhoto(userObj)
 }
 
-const main = document.querySelector("main")
+// REFACTOR to rename div
+
 const div = document.createElement('div')
 
 // Post Helper Methods
@@ -139,14 +216,16 @@ const createPostCard = (post) => {
 }
 
 const renderPosts = user => {
+  const createPostButton = document.createElement('button')
+  createPostButton.id = "new-post-btn"
+  createPostButton.className = "btn btn-outline-secondary"
+  createPostButton.textContent = "Create A New Post"
+  main.append(createPostButton)
   div.innerHTML = ""
   user.posts.forEach(post => {
     createPostCard(post)
   })
 }
-
-const postForm = document.querySelector('#post-form')
-console.log(postForm)
 
 // Event Listeners
 
@@ -164,6 +243,26 @@ const editUserEventHandler = () => {
         }
     }
   })
+}
+
+  // Post Event Listener
+const newPostEventListener = () => {
+
+  const addBtn = document.querySelector("#new-post-btn")
+  const postFormContainer = document.querySelector(".container")
+
+  addBtn.addEventListener("click", () => {
+    // hide & seek with the form
+    addPost = !addPost;
+    if (addPost) {
+      postFormContainer.style.display = "block";
+      addBtn.textContent = "Hide Form"
+    } else {
+      postFormContainer.style.display = "none";
+      addBtn.textContent = "Create A New Post"
+    }
+  });
+  postFormEventListener()
 }
 
 const editProfilePhoto = (userObj) => {
@@ -202,12 +301,15 @@ function toggle(element) {
 
 //------------ Make POST request for a new post, update in comments board ------------//
 // Add Event Handler for Submit
-postForm.addEventListener("submit", event => {
-  event.preventDefault()
-  // console.log('You clicked Submit')
-  createNewPost(event)
-  postForm.reset()
-})
+const postFormEventListener = () => {
+  const postForm = document.querySelector('#post-form')
+  postForm.addEventListener("submit", event => {
+    event.preventDefault()
+    // console.log('You clicked Submit')
+    createNewPost(event)
+    postForm.reset()
+  })
+}
 // Grab textarea.value
 const createNewPost = (event) => {
   // Grab info
@@ -301,7 +403,6 @@ const editPostForm = (card) => {
 const cardEdit = (card) => {
   card.addEventListener("submit", event => {
     event.preventDefault()
-    // console.log('Meeeeeeee')
     editPost(event)
   })
 }
@@ -312,8 +413,6 @@ const editPost = (event) => {
   const card = event.target.parentElement
   const postId = card.dataset.id
 
-  // console.log(postId)
-  
   editPostFetch(title, content, postId, card)
 }
 
