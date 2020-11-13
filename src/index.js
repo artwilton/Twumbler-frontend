@@ -601,6 +601,8 @@ const changeThemeToPink = () => {
   blueLogo.style.display = "none"
   pinkLogo.style.display = "block"
 
+  body.style.background = 'white'
+
   const list = document.getElementsByClassName('btn');
   for (let item of list) {
     item.style.background='lightpink'
