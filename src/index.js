@@ -569,6 +569,8 @@ const blue = document.querySelector('.blue-theme')
 const pinkLogo = document.querySelector('.pink-logo')
 const blueLogo = document.querySelector('.blue-logo')
 
+const list = document.getElementsByClassName('btn')
+
 const body = document.querySelector('body')
 
 blue.addEventListener("click", event => {
@@ -584,6 +586,8 @@ pink.addEventListener("click", event => {
 const changeThemeToBlue = () => {
   console.log("Blue")
 
+  document.body.classList.remove("boomer-theme")
+
   blueLogo.style.display = "block"
   pinkLogo.style.display = "none"
 
@@ -592,20 +596,23 @@ const changeThemeToBlue = () => {
   const list = document.getElementsByClassName('btn');
   for (let item of list) {
     item.style.background='lightblue'
+    item.classList.remove('large-button-text')
   }
 }
 
 const changeThemeToPink = () => {
   console.log("Pink")
 
+  document.body.classList.remove("boomer-theme")
+
   blueLogo.style.display = "none"
   pinkLogo.style.display = "block"
 
   body.style.background = 'white'
 
-  const list = document.getElementsByClassName('btn');
   for (let item of list) {
     item.style.background='lightpink'
+    item.classList.remove('large-button-text')
   }
 }
 
@@ -616,6 +623,10 @@ function boomerEventListener() {
   boomer.addEventListener('click', event => {
     document.body.classList.add("boomer-theme")
     console.log('change to blue')
+
+    for (let item of list) {
+      item.classList.add('large-button-text')
+    }
   })
 }
 

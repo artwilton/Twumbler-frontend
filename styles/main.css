@@ -186,3 +186,7 @@ close-comments {
 .comments .card .card-text {
   color: rgb(228, 96, 96);
 }
+
+.large-button-text {
+  font-size: 40px;
+}
