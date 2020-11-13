@@ -6,29 +6,36 @@ body {
   padding: 0;
   display: grid;
   grid-template-areas: 
-    "header header header "
-    "user-info main main ";
+    "header header header"
+    "user-info main post-comments";
   grid-template-columns: 300px 1fr;
   grid-template-rows: 80px 1fr;
   row-gap: 10px;
   column-gap: 15px;
-  font: Amatic SC;
+  font: Varela Round;
+  overflow: hidden;
 }
   
 nav {
   grid-area: header;
-  /* border: 2px solid red; */
+  background-color: whitesmoke;
 }
 
 nav .btn {
-  outline-color: lightpink;
+  background-color: lightpink;
+  text-color: white;
 }
 
 main {
-  /* font: Amatic SC; */
+  /* font: overpass; */
   grid-area: main;
   padding: 10px;
+  align: center
   /* border: 2px solid blue; */
+}
+
+post-comments {
+  grid-area: post-comments;
 }
 
 #user-info {
@@ -61,7 +68,7 @@ main {
 }
 
 .edit:hover {
-  background-color: lavender;
+  background-color: lightpink;
 }
 
 .delete:hover {
@@ -71,6 +78,8 @@ main {
 #new-post-btn {
   background-color: lightpink;
   /* text-color: black; */
+  /* width: 100%; */
+  align: cneter;
 }
 
 #new-post-btn:hover {
@@ -103,4 +112,14 @@ main {
 .col:hover{
   transform: scale(1.00);
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+#posts {
+  height: 85vh;
+  /* width: 100vw; */
+  overflow-y: scroll;
+}
+
+.btn {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
