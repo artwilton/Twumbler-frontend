@@ -146,12 +146,12 @@ const createPostCard = (post) => {
   card.innerHTML = `
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
-      <div class="btn-group dropleft">
+      <div class="btn-group dropup">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Options
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button type=button class="edit btn btn-primary dropdown-item">Edit</button>
+          <button type=button class="edit btn btn-secondary dropdown-item">Edit</button>
           <div class="dropdown-divider"></div>
           <button type=button class="delete btn btn-danger dropdown-item">Delete</button>
         </div>
