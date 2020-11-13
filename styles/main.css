@@ -1,7 +1,4 @@
-
-
-
-body {
+.logged-in {
   margin: 0;
   padding: 0;
   display: grid;
@@ -14,6 +11,15 @@ body {
   column-gap: 15px;
   font: Varela Round;
   overflow: hidden;
+}
+
+.login-page {
+  padding: 200px;
+  font: Amatic SC;
+}
+
+.login-page #user-info {
+  display: none;
 }
   
 nav {

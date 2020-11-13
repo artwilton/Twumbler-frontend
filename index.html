@@ -51,42 +51,42 @@
     </nav>
     <div id="user-info">
       <img id="user-profile-photo" src="https://pyxis.nymag.com/v1/imgs/6c0/570/056961772f9239c7ad26e784b020e410ae-beyonce.rsquare.w1200.jpg" alt="profile-picture" style="max-width: 300px"/>
+      <!-- <button class="edit-profile-photo"> Edit Photo </button><br> -->
       <br>
-      <p id="user-name">Beyonce</p>
-      <p id="user-age">39</p>
-      <p id="user-bio">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident est sunt, repellat eaque, ratione omnis ullam ipsum eum reprehenderit quam culpa distinctio dolores nisi totam doloribus quas ex, odit eos!</p>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Options
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button class="edit btn btn-secondary dropdown-item">Edit</button>
-          <div class="dropdown-divider"></div>
-          <button class="delete btn btn-danger dropdown-item">Delete Account</button>
+      <div id="user-info-text">
+        <p id="user-name">Beyonce</p>
+        <p id="user-age">39</p>
+        <p id="user-bio">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident est sunt, repellat eaque, ratione omnis ullam ipsum eum reprehenderit quam culpa distinctio dolores nisi totam doloribus quas ex, odit eos!</p>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="edit btn btn-primary dropdown-item">Edit</button>
+            <div class="dropdown-divider"></div>
+            <button class="delete btn btn-danger dropdown-item">Delete</button>
+          </div>
         </div>
-      </div>
+      </div>  
     </div>
     <main>
-      <div class="container">
-        <form id="post-form">
-          <fieldset>
-            <legend>New Post</legend>
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" id="title" name="title" style="width:50%">
-            </div>
-            <div class="form-group">
-              <label for="content">Content</label>
-              <textarea name="content" style="width:100%; height: 100px;" value=""></textarea> 
-            </div>
-            <button type="submit" value="Submit" class="btn btn-secondary">Submit</button>
-          </fieldset>
-        </form>
-      </div>
-      <br>
-      <button id="new-post-btn" class="btn btn-outline-secondary">Create A New Post</button>
-      <br><br>
     </main>
     <post-comments></post-comments>
   </body>
 </html>
+
+<!-- post-form-button -->
+<!-- <form id="post-form">
+  <fieldset>
+    <legend>New Post</legend>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" style="width:50%">
+    </div>
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea name="content" style="width:100%; height: 100px;" value=""></textarea> 
+    </div>
+    <button type="submit" value="Submit" class="btn btn-secondary">Submit</button>
+  </fieldset>
+</form> -->
