@@ -4,6 +4,8 @@
   display: grid;
   grid-template-areas: 
     "header header header header"
+    "user-info main main close-comments"
+    /* "user-info main main post-comments" */
     "user-info main main post-comments";
   grid-template-columns: 300px 1fr;
   grid-template-rows: 80px 1fr;
@@ -57,9 +59,9 @@ post-comments {
   border-color: whitesmoke;
 }
 
-#ad-space {
-  grid-area: ad-space;
-  padding: 10px;
+close-comments {
+  grid-area: close-comments;
+  /* padding: 10px; */
   /* border: 2px solid green; */
 }
 
@@ -150,7 +152,7 @@ post-comments {
 }
 
 .post-with-comments {
-  height: 75vh;
+  height: 90vh;
   max-width: 300px;
   overflow-y: scroll;
 }
@@ -158,11 +160,26 @@ post-comments {
 .comments {
   color: lightpink;
   text-align: left;
+  margin-top: 20px;
+  margin-bottom: 65px;
+}
 
+.close-comments {
+  color: rgb(228, 96, 96);
+  margin-top: 10px;
+  text-align: center;
+  /* background-color: white; */
+  /* border-color: whitesmoke; */
 }
 
 .comments .card {
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   padding: 0px;
   margin-top: 6px;
+}
+
+
+
+.comments .card .card-text {
+  color: rgb(228, 96, 96);
 }

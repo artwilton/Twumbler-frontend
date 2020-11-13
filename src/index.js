@@ -452,7 +452,9 @@ const editPostFetch = (title, content, postId, card) => {
 // Render comments in 'post-comments'
 const postComments = document.querySelector('post-comments')
 const postAndComments = document.querySelector('post-and-comments')
-console.log(postComments.innerHTML)
+// console.log(postComments.innerHTML)
+
+const closeCommentsBtn = document.querySelector('close-comments')
 
 const viewComments = (postId) => {
   console.log(postId)
@@ -461,14 +463,17 @@ const viewComments = (postId) => {
 
 const createPostCardWithComments = (post) => {
   postComments.innerHTML = ""
+  closeCommentsBtn.innerHTML = ""
+
+  const buttonDiv = document.createElement('div')
+  buttonDiv.innerHTML = `<button class="close-comments btn">Close</button>`
+  closeCommentsBtn.append(buttonDiv)
 
   const div = document.createElement('div')
   div.className = "post-and-comments"
   const card = document.createElement("card")
   card.innerHTML = `
-        <div class="card-header">
-          <h3>${post.title}</h3>
-        </div>
+        <div class="card-header"><h3>${post.title}</h3></div>
         <div class="card-body">
           <p class="card-title">${post.content}</p>
           <div class=comments></div>
@@ -480,6 +485,8 @@ const createPostCardWithComments = (post) => {
   postComments.append(div)
 }
 
+let commentCreated = 1
+
 const createCommentLi = (comment) => {
   const div = document.querySelector('.comments')
   console.log(div)
@@ -488,7 +495,8 @@ const createCommentLi = (comment) => {
   card.className = "card"
   card.innerHTML = `
   <div class="card-body">
-    <p class="card-title">${comment.content}</p>
+    <p class="card-title">"${comment.content}"</p>
+    <p class="card-text"><em><small>${commentCreated+=1} hours ago</small></em></p>
   </div>
   `
   div.append(card)
@@ -505,11 +513,21 @@ const fetchPost = (postId) => {
   fetch(`http://localhost:3000/api/v1/posts/${postId}`)
   .then(r => r.json())
   .then(post => {
-    console.log(post)
+    // console.log(post)
     createPostCardWithComments(post)
     renderComments(post)
   })
 }
 
 
-// Close
+// Close Comments
+closeCommentsBtn.addEventListener("click", event => {
+  if (event.target.matches('.close-comments')) {
+    closeComments()
+  }
+})
+
+const closeComments = () => {
+  postComments.innerHTML = ""
+  closeCommentsBtn.innerHTML = ""
+}
