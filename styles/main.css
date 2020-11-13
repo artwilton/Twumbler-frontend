@@ -35,6 +35,7 @@ main {
 
 post-comments {
   grid-area: post-comments;
+  /* grid-template-columns: 1fr fit-content(20%) */
 }
 
 #user-info {
@@ -136,4 +137,14 @@ post-comments {
 .view-comments {
   background-color: rgb(255, 210, 217);
   color: grey;
+}
+
+.post-with-comments {
+  /* height: 85vh; */
+  max-width: 300px;
+}
+
+.post-and-comments {
+  /* height: 85vh; */
+  overflow-y: scroll;
 }
