@@ -6,6 +6,7 @@ let loggedIn = false;
 
 const main = document.querySelector("main")
 const navBarLogin = document.querySelector('#navbar-login')
+const searchButton = document.querySelector('#user-search')
 
 // User Info Elements
 const userInfo = document.querySelector("#user-info")
@@ -23,6 +24,7 @@ const userProfilePhoto = document.querySelector("#user-profile-photo")
 window.addEventListener('DOMContentLoaded', (event) => {
   initLogin()
   logoutEventListender()
+  searchEventListener()
   // initUser()
 });
 
@@ -81,6 +83,20 @@ function logoutEventListender() {
     navBarLogin.firstElementChild.textContent = "Login"
     initLogin()
   })
+}
+
+// Search
+
+function searchEventListener() {
+  searchButton.addEventListener('submit', event => {
+    event.preventDefault()
+    filterSearchResults(event.target.search.value)
+  })
+}
+
+function filterSearchResults(search) {
+  console.log(search)
+  
 }
 
 // Fetch
