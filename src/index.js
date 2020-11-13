@@ -1,13 +1,29 @@
-let currentUserId = 5
+let currentUserId = 1
 
 const userInfo = document.querySelector("#user-info")
+const userInfoText = userInfo.querySelector('#user-info-text')
 const userName = document.querySelector("#user-name")
 const userAge = document.querySelector("#user-age")
 const userBio = document.querySelector("#user-bio")
 const userProfilePhoto = document.querySelector("#user-profile-photo")
 
+let addPost = false;
+
 window.addEventListener('DOMContentLoaded', (event) => {
   initUser()
+  const addBtn = document.querySelector("#new-post-btn");
+  const postFormContainer = document.querySelector(".container");
+  addBtn.addEventListener("click", () => {
+    // hide & seek with the form
+    addPost = !addPost;
+    if (addPost) {
+      postFormContainer.style.display = "block";
+      addBtn.textContent = "Hide Form"
+    } else {
+      postFormContainer.style.display = "none";
+      addBtn.textContent = "Create A New Post"
+    }
+  });
 });
 
 
@@ -34,30 +50,6 @@ const deleteUser = () => {
   initUser()
 }
 
-const editUserFetch = (userObj) => {
-  const configObj = {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(userObj)
-  }
-  // Add to database (CREATE)
-  fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, configObj)
-  .then(r => r.json())
-  .then(user => {
-    // console.log(user)
-
-    renderUser(user)
-    userInfo.querySelector('button').style.display = ''
-    userInfo.querySelectorAll('p').forEach(p => {
-      p.style.display = ''
-    });
-    userInfo.querySelector('form').remove()
-    
-  })
-}
-
 // User Helper Methods
 
 const renderUser = user => {
@@ -67,7 +59,10 @@ const renderUser = user => {
   userName.textContent = user.name
   userAge.textContent = user.age
   userBio.textContent = user.bio
+
   userInfo.dataset.id = user.id
+  userInfo.className = 'card'
+
   userProfilePhoto.src = `http://localhost:3000/${user.user_profile_photo}`
   currentUserId = user.id
 }
@@ -84,15 +79,13 @@ const editUserForm = () => {
   <label for=age>Age:</label><br>
   <textarea name=age>${userAge.textContent}</textarea><br>
   <label for=bio>Bio:</label><br>
-  <textarea name=bio>${userBio.textContent}</textarea> 
+  <textarea name=bio>${userBio.textContent}</textarea><br><br>
+  <Input type='file' name='profile_photo' class="edit-profile-photo"/><br><br>
   <input type=submit value=Submit>
   </fieldset>
   `
   
-  userInfo.querySelector('button').style.display = 'none'
-  userInfo.querySelectorAll('p').forEach(p => {
-    p.style.display = 'none'
-  });
+  toggle(userInfoText)
   userInfo.append(form)
   userInfoEdit(userInfo)
   
@@ -113,7 +106,7 @@ const editUser = (event) => {
 
   let userObj = {name, age, bio}
   
-  editUserFetch(userObj)
+  editProfilePhoto(userObj)
 }
 
 const main = document.querySelector("main")
@@ -121,20 +114,25 @@ const div = document.createElement('div')
 
 // Post Helper Methods
 div.id = 'posts'
+div.className = 'row row-cols-1 row-cols-md-2'
 const createPostCard = (post) => {
 
   const card = document.createElement("card")
-  card.className = 'card'
   card.innerHTML = `
-  <br>
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
-      <button type=button class='edit'>Edit</button>
-      <button type=button class='delete btn btn-danger'>Delete</button>
+      <div class="btn-group dropleft">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button type=button class="edit btn btn-primary dropdown-item">Edit</button>
+          <div class="dropdown-divider"></div>
+          <button type=button class="delete btn btn-danger dropdown-item">Delete</button>
+        </div>
+      </div>
   <br>
   `
   card.dataset.id = post.id
-  card.className = 'cards'
+  card.className = 'col mb-4 card'
 
   div.prepend(card)
   main.append(div)
@@ -164,33 +162,42 @@ const editUserEventHandler = () => {
         } else {
           console.log('User was not removed from the database.');
         }
-    } else if (event.target.matches('.edit-profile-photo')) {
-      
-      console.log('change user photo')
-      editProfilePhoto()
     }
   })
 }
 
-const editProfilePhoto = () => {
+const editProfilePhoto = (userObj) => {
 
+  const formData = new FormData();
   const fileField = document.querySelector('input[type="file"]');
-  console.log(fileField.files[0])
+  
+  formData.append('name', userObj.name);
+  formData.append('age', userObj.age);
+  formData.append('bio', userObj.bio);
 
-
+  if (!!fileField.files[0]) {
+    formData.append('profile_photo', fileField.files[0]);
+  }
   
   fetch(`http://localhost:3000/api/v1/users/${currentUserId}`, {
     method: 'PUT',
-    body: ({profile_photo: fileField.files[0]})
-    
+    body: formData
   })
   .then(response => response.json())
-  .then(result => {
-    console.log('Success:', result);
+  .then(user => {
+    userInfo.querySelector('form').remove()
+    renderUser(user)
+    toggle(userInfoText)
   })
-  .catch(error => {
-    console.error('Error:', error);
-  });  
+ 
+}
+
+function toggle(element) {
+  if (element.style.display == "none") {
+    element.style.display = ""
+  } else {
+    element.style.display = "none"
+  }
 }
 
 //------------ Make POST request for a new post, update in comments board ------------//
@@ -236,8 +243,10 @@ const createPostFetch = (title, content) => {
 // User can edit their post (show that it was edited) PATCH request
 div.addEventListener("click", event => {
   // console.log('You clicked me')
-  const card = event.target.parentElement
+  const card = event.target.closest('card')
+  // console.log(card)
   const postId = card.dataset.id
+  // console.log(postId)
   
   if (event.target.matches('.edit')) {
     editPostForm(card)
@@ -325,11 +334,11 @@ const editPostFetch = (title, content, postId, card) => {
   .then(post => {
     console.log(post)
     //Delete Form from card
-    card.innerHTML = ""
+    card.remove()
     // Render post
     createPostCard(post)
 
   })
 }
 
-
+// renderFriends

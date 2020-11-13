@@ -1,36 +1,106 @@
+
+
+
 body {
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-areas: 
-      "header header header header"
-      "user-info main main ad-space";
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 80px 1fr;
-    row-gap: 10px;
-    column-gap: 15px;
-  }
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-areas: 
+    "header header header "
+    "user-info main main ";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 80px 1fr;
+  row-gap: 10px;
+  column-gap: 15px;
+  font: Amatic SC;
+}
   
-  header {
-    grid-area: header;
-    /* border: 2px solid red; */
-  }
-  
-  main {
-    grid-area: main;
-    /* border: 2px solid blue; */
-  }
-  
-  #user-info {
-    grid-area: user-info;
-    /* border: 2px solid green; */
-  }
+nav {
+  grid-area: header;
+  /* border: 2px solid red; */
+}
 
-  #ad-space {
-    grid-area: ad-space;
-    /* border: 2px solid green; */
-  }
+nav .btn {
+  outline-color: lightpink;
+}
 
-  .edit {
-    /* color: blue; */
-  }
+main {
+  /* font: Amatic SC; */
+  grid-area: main;
+  padding: 10px;
+  /* border: 2px solid blue; */
+}
+
+#user-info {
+  grid-area: user-info;
+  padding: 10px;
+  /* text-align: center; */
+  /* border: 2px solid green; */
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+}
+
+#ad-space {
+  grid-area: ad-space;
+  padding: 10px;
+  /* border: 2px solid green; */
+}
+
+.container {
+  padding: 1rem;
+  width: stretch;
+  height: auto;
+  display: none;
+  /* background: #515DA2; */
+  /* opacity: .8; */
+}
+
+.edit  {
+  /* background-color: rgb(181, 60, 192); */
+  /* color: black;  */
+}
+
+.edit:hover {
+  background-color: lavender;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+#new-post-btn {
+  background-color: lightpink;
+  /* text-color: black; */
+}
+
+#new-post-btn:hover {
+  background-color: grey;
+}
+
+.dropdown-toggle {
+  background-color: lightpink;
+}
+
+#post-form .btn {
+  background-color: lightpink;
+}
+
+#post-form .btn:hover {
+  background-color: grey;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  /* transform: scale(.8); */
+  text-align: center;
+  /* background-color: #f1f1f1; */
+}
+.col {
+  transform: scale(.95);
+}
+.col:hover{
+  transform: scale(1.00);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}

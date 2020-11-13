@@ -18,7 +18,7 @@
   </head>
   <body>
     <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand" href="#">LOGO</a>
+      <video class="navbar-brand" autoplay loop muted playsinline src="imgs/pink-twumbler-pink-clouds.mp4" style="height:2.1cm"></video>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,40 +41,53 @@
             <a class="nav-link" href="#">Login</a>
           </li>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
+        <!-- SHOULD SEARCH THROUGH USERS -->
+        <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <!-- SEARCH FUNCTION NOT YET COMPLETED -->
       </div>
     </nav>
-        <div id="user-info">
-          <img id="user-profile-photo" src="https://pyxis.nymag.com/v1/imgs/6c0/570/056961772f9239c7ad26e784b020e410ae-beyonce.rsquare.w1200.jpg" alt="profile-picture" style="max-width: 250px"/>
-          <!-- <button class="edit-profile-photo"> Edit Photo </button><br> -->
-          <Input type='file' name='profile_photo' class="edit-profile-photo"/><br><br>
-          <p id="user-name">Beyonce</p>
-          <p id="user-age">39</p>
-          <p id="user-bio">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident est sunt, repellat eaque, ratione omnis ullam ipsum eum reprehenderit quam culpa distinctio dolores nisi totam doloribus quas ex, odit eos!</p>
-          <button class="edit">Edit</button>
-          <button class="delete">Delete</button>
+    <div id="user-info">
+      <img id="user-profile-photo" src="https://pyxis.nymag.com/v1/imgs/6c0/570/056961772f9239c7ad26e784b020e410ae-beyonce.rsquare.w1200.jpg" alt="profile-picture" style="max-width: 300px"/>
+      <!-- <button class="edit-profile-photo"> Edit Photo </button><br> -->
+      <br>
+      <div id="user-info-text">
+        <p id="user-name">Beyonce</p>
+        <p id="user-age">39</p>
+        <p id="user-bio">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident est sunt, repellat eaque, ratione omnis ullam ipsum eum reprehenderit quam culpa distinctio dolores nisi totam doloribus quas ex, odit eos!</p>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="edit btn btn-primary dropdown-item">Edit</button>
+            <div class="dropdown-divider"></div>
+            <button class="delete btn btn-danger dropdown-item">Delete</button>
+          </div>
         </div>
-        <main>
-          <form id="post-form">
-            <fieldset>
-              <legend>Add New Post:</legend>
-              <label for="title">Title:</label><br>
-              <input type="text" id="title" name="title"><br>
-              <label for="content">Content:</label><br>
+      </div>  
+    </div>
+    <main>
+      <div class="container">
+        <form id="post-form">
+          <fieldset>
+            <legend>New Post</legend>
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" id="title" name="title" style="width:50%">
+            </div>
+            <div class="form-group">
+              <label for="content">Content</label>
               <textarea name="content" style="width:100%; height: 100px;" value=""></textarea> 
-              <input type="submit" value="Submit">
-            </fieldset>
-          </form> 
-        </main>
-        <div id="ad-space">
-          <img src="https://pbs.twimg.com/media/EMzpogUWwAE83BL?format=png&name=360x360" alt="Ad Space" style="max-width: 200px;" /><br>
-          <img src="https://pbs.twimg.com/media/EMzpogUWwAE83BL?format=png&name=360x360" alt="Ad Space" style="max-width: 200px;" /><br>
-          <img src="https://pbs.twimg.com/media/EMzpogUWwAE83BL?format=png&name=360x360" alt="Ad Space" style="max-width: 200px;" /><br>
-          Ad Space
-        </div>
-
+            </div>
+            <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+          </fieldset>
+        </form>
+      </div>
+      <button id="new-post-btn" class="btn btn-outline-secondary">Create A New Post</button>
+    </main>
+        
   </body>
 </html>
