@@ -5,6 +5,7 @@ let addPost = false;
 let loggedIn = false;
 
 const main = document.querySelector("main")
+const navBarLogin = document.querySelector('#navbar-login')
 
 // User Info Elements
 const userInfo = document.querySelector("#user-info")
@@ -14,12 +15,14 @@ const userAge = document.querySelector("#user-age")
 const userBio = document.querySelector("#user-bio")
 const userProfilePhoto = document.querySelector("#user-profile-photo")
 
+
 // Post Elements
 
 
 // DOM Content Loaded
 window.addEventListener('DOMContentLoaded', (event) => {
   initLogin()
+  logoutEventListender()
   // initUser()
 });
 
@@ -71,6 +74,15 @@ function getUserIdFromLogin(email) {
   })
 }
 
+// Logout
+
+function logoutEventListender() {
+  navBarLogin.addEventListener('click', event => {
+    navBarLogin.firstElementChild.textContent = "Login"
+    initLogin()
+  })
+}
+
 // Fetch
 
 fetchUser = () => {
@@ -112,6 +124,7 @@ const initUser = () => {
       renderPostEditForm()
       newPostEventListener()
       document.querySelector('#login-form').remove()
+      navBarLogin.firstElementChild.textContent = "Logout"
     })
 }
 
