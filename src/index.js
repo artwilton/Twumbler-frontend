@@ -546,19 +546,46 @@ const closeComments = () => {
 }
 
 //--------***************CHANGE THEME******************--------//
-const theme = document.querySelector('.theme')
-const pink = document.querySelector('pink-theme')
-const blue = document.querySelector('blue-theme')
+const pink = document.querySelector('.pink-theme')
+const blue = document.querySelector('.blue-theme')
+
+const pinkLogo = document.querySelector('.pink-logo')
+const blueLogo = document.querySelector('.blue-logo')
+
+const body = document.querySelector('body')
 
 blue.addEventListener("click", event => {
-  console.log(event.target)
+  // console.log(event.target)
   changeThemeToBlue()
 })
 
+pink.addEventListener("click", event => {
+  // console.log(event.target)
+  changeThemeToPink()
+})
+
 const changeThemeToBlue = () => {
+  console.log("Blue")
+
+  blueLogo.style.display = "block"
+  pinkLogo.style.display = "none"
+
+  body.style.background = 'rgb(206, 224, 241)'
+
   const list = document.getElementsByClassName('btn');
-
   for (let item of list) {
+    item.style.background='lightblue'
+  }
+}
 
+const changeThemeToPink = () => {
+  console.log("Pink")
+
+  blueLogo.style.display = "none"
+  pinkLogo.style.display = "block"
+
+  const list = document.getElementsByClassName('btn');
+  for (let item of list) {
+    item.style.background='lightpink'
   }
 }

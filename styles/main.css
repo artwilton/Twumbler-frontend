@@ -23,6 +23,7 @@
 .login-page #user-info {
   display: none;
 }
+
   
 nav {
   grid-area: header;
