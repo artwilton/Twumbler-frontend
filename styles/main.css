@@ -140,11 +140,19 @@ post-comments {
 }
 
 .post-with-comments {
-  /* height: 85vh; */
+  height: 75vh;
   max-width: 300px;
+  overflow-y: scroll;
 }
 
-.post-and-comments {
-  /* height: 85vh; */
-  overflow-y: scroll;
+.comments {
+  color: lightpink;
+  text-align: left;
+
+}
+
+.comments .card {
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  padding: 0px;
+  margin-top: 6px;
 }

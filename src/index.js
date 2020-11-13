@@ -151,9 +151,9 @@ const createPostCard = (post) => {
           Options
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button type=button class="edit btn btn-secondary dropdown-item">Edit</button>
+          <button type=button class="edit btn btn-secondary dropdown-item">Edit Post</button>
           <div class="dropdown-divider"></div>
-          <button type=button class="delete btn btn-danger dropdown-item">Delete</button>
+          <button type=button class="delete btn btn-danger dropdown-item">Delete Post</button>
         </div>
         <button class="view-comments btn btn-secondary">View Comments</button>
       </div>
@@ -371,9 +371,9 @@ const createPostCardWithComments = (post) => {
               Options
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <button type=button class="edit btn btn-secondary dropdown-item">Edit</button>
+              <button type=button class="edit btn btn-secondary dropdown-item">Edit Post</button>
               <div class="dropdown-divider"></div>
-              <button type=button class="delete btn btn-danger dropdown-item">Delete</button>
+              <button type=button class="delete btn btn-danger dropdown-item">Delete Post</button>
             </div>
           </div>
           <div class=comments></div>
@@ -390,6 +390,7 @@ const createCommentLi = (comment) => {
   console.log(div)
 
   const card = document.createElement('card')
+  card.className = "card"
   card.innerHTML = `
   <div class="card-body">
     <p class="card-title">${comment.content}</p>
@@ -415,3 +416,5 @@ const fetchPost = (postId) => {
   })
 }
 
+
+// Close
