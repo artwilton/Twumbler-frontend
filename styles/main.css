@@ -148,11 +148,15 @@ post-comments {
 .comments {
   color: lightpink;
   text-align: left;
-
+  margin-top: 20px;
 }
 
 .comments .card {
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
   padding: 0px;
   margin-top: 6px;
+}
+
+.comments .card .card-text {
+  color: rgb(228, 96, 96);
 }

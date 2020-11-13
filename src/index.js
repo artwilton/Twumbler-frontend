@@ -385,6 +385,8 @@ const createPostCardWithComments = (post) => {
   postComments.append(div)
 }
 
+let commentCreated = 1
+
 const createCommentLi = (comment) => {
   const div = document.querySelector('.comments')
   console.log(div)
@@ -393,7 +395,8 @@ const createCommentLi = (comment) => {
   card.className = "card"
   card.innerHTML = `
   <div class="card-body">
-    <p class="card-title">${comment.content}</p>
+    <p class="card-title">"${comment.content}"</p>
+    <p class="card-text"><em><small>${commentCreated+=1} hours ago</small></em></p>
   </div>
   `
   div.append(card)
