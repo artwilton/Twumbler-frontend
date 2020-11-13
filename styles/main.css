@@ -65,13 +65,13 @@ post-comments {
 .btn {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 2px solid rgb(252, 251, 251);
-  /* color: white; */
-  border-radius: 10px;
+  color: white;
+  /* border-radius: 10px; */
 }
 
 .edit  {
   /* background-color: rgb(181, 60, 192); */
-  /* color: black;  */
+  color: black; 
   box-shadow: 0 0px 0px 0 ;
 }
 
@@ -80,6 +80,7 @@ post-comments {
 }
 
 .delete {
+  color: black; 
   box-shadow: 0 0px 0px 0 ;
 }
 
@@ -130,4 +131,9 @@ post-comments {
   height: 85vh;
   /* width: 50vw; */
   overflow-y: scroll;
+}
+
+.view-comments {
+  background-color: rgb(255, 210, 217);
+  color: grey;
 }

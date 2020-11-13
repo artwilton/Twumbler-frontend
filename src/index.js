@@ -155,6 +155,7 @@ const createPostCard = (post) => {
           <div class="dropdown-divider"></div>
           <button type=button class="delete btn btn-danger dropdown-item">Delete</button>
         </div>
+        <button id="${post.id}" class="view-comments btn btn-secondary">View Comments</button>
       </div>
   <br>
   `
@@ -255,6 +256,10 @@ div.addEventListener("click", event => {
       console.log('Post was not removed from the database.');
     }
   }
+
+  if (event.target.matches('.view-comments')) {
+    viewComments(card)
+  }
 })
 
 // User can delete their post
@@ -335,4 +340,10 @@ const editPostFetch = (title, content, postId, card) => {
   })
 }
 
-// renderFriends
+//--------***************RENDER POST & COMMENTS******************--------//
+// Event listener for .view-comments button
+  // can add to post event listener
+// Fetch post comments 
+// Render comments in 'post-comments'
+
+
