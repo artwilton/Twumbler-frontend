@@ -146,13 +146,14 @@ const createPostCard = (post) => {
   card.innerHTML = `
       <h3 class=card-header>${post.title}</h3>  
       <p class=card-body>${post.content}</p>
-      <div class="btn-group dropleft">
+      <div class="btn-group dropup">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button type=button class="edit btn btn-primary dropdown-item">Edit</button>
+          <button type=button class="edit btn btn-secondary dropdown-item">Edit Post</button>
           <div class="dropdown-divider"></div>
-          <button type=button class="delete btn btn-danger dropdown-item">Delete</button>
+          <button type=button class="delete btn btn-danger dropdown-item">Delete Post</button>
         </div>
+        <button class="view-comments btn btn-secondary">View Comments</button>
       </div>
   <br>
   `
@@ -253,6 +254,12 @@ div.addEventListener("click", event => {
       console.log('Post was not removed from the database.');
     }
   }
+  // Event listener for .view-comments button
+  // can add to div event listener
+  if (event.target.matches('.view-comments')) {
+    console.log("View Comments!")
+    viewComments(postId)
+  }
 })
 
 // User can delete their post
@@ -333,4 +340,69 @@ const editPostFetch = (title, content, postId, card) => {
   })
 }
 
-// renderFriends
+//--------***************RENDER POST & COMMENTS******************--------//
+// Fetch post comments 
+// Render comments in 'post-comments'
+const postComments = document.querySelector('post-comments')
+const postAndComments = document.querySelector('post-and-comments')
+console.log(postComments.innerHTML)
+
+const viewComments = (postId) => {
+  console.log(postId)
+  fetchPost(postId)
+}
+
+const createPostCardWithComments = (post) => {
+  postComments.innerHTML = ""
+
+  const div = document.createElement('div')
+  div.className = "post-and-comments"
+  const card = document.createElement("card")
+  card.innerHTML = `
+        <div class="card-header">
+          <h3>${post.title}</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-title">${post.content}</p>
+          <div class=comments></div>
+        </div>
+  `
+  card.dataset.id = post.id
+  card.className = 'post-with-comments card'
+  div.append(card)
+  postComments.append(div)
+}
+
+const createCommentLi = (comment) => {
+  const div = document.querySelector('.comments')
+  console.log(div)
+
+  const card = document.createElement('card')
+  card.className = "card"
+  card.innerHTML = `
+  <div class="card-body">
+    <p class="card-title">${comment.content}</p>
+  </div>
+  `
+  div.append(card)
+}
+
+const renderComments = post => {
+  // ul.innerHTML = ""
+  post.comments.forEach(comment => {
+    createCommentLi(comment)
+  })
+}
+
+const fetchPost = (postId) => {
+  fetch(`http://localhost:3000/api/v1/posts/${postId}`)
+  .then(r => r.json())
+  .then(post => {
+    console.log(post)
+    createPostCardWithComments(post)
+    renderComments(post)
+  })
+}
+
+
+// Close
