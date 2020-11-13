@@ -66,6 +66,7 @@ post-comments {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border: 2px solid rgb(252, 251, 251);
   /* color: white; */
+  border-radius: 10px;
 }
 
 .edit  {
