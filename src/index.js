@@ -79,7 +79,7 @@ function getUserIdFromLogin(email) {
 
 // Logout
 
-function logoutEventListender() {
+function logoutEventListener() {
   navBarLogin.addEventListener('click', event => {
     navBarLogin.firstElementChild.textContent = "Login"
     initLogin()
@@ -235,7 +235,6 @@ const createPostCard = (post) => {
           <div class="dropdown-divider"></div>
           <button type=button class="delete btn btn-danger dropdown-item">Delete Post</button>
         </div>
-        <button class="view-comments btn btn-secondary">View Comments</button>
       </div>
   <br>
   `
