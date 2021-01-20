@@ -23,7 +23,7 @@ const userProfilePhoto = document.querySelector("#user-profile-photo")
 // DOM Content Loaded
 window.addEventListener('DOMContentLoaded', (event) => {
   initLogin()
-  logoutEventListender()
+  logoutEventListener()
   searchEventListener()
   boomerEventListener()
   // initUser()
@@ -141,6 +141,7 @@ const initUser = () => {
       renderPostEditForm()
       newPostEventListener()
       document.querySelector('#login-form').remove()
+      navBarLogin.firstElementChild.className = "nav-link"
       navBarLogin.firstElementChild.textContent = "Logout"
     })
 }
