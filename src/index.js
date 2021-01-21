@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   initLogin()
   logoutEventListener()
   searchEventListener()
-  boomerEventListener()
+  largeEventListener()
   // initUser()
 });
 
@@ -588,7 +588,7 @@ pink.addEventListener("click", event => {
 const changeThemeToBlue = () => {
   console.log("Blue")
 
-  document.body.classList.remove("boomer-theme")
+  document.body.classList.remove("large-theme")
 
   blueLogo.style.display = "block"
   pinkLogo.style.display = "none"
@@ -605,7 +605,7 @@ const changeThemeToBlue = () => {
 const changeThemeToPink = () => {
   console.log("Pink")
 
-  document.body.classList.remove("boomer-theme")
+  document.body.classList.remove("large-theme")
 
   blueLogo.style.display = "none"
   pinkLogo.style.display = "block"
@@ -618,12 +618,12 @@ const changeThemeToPink = () => {
   }
 }
 
-function boomerEventListener() {
+function largeEventListener() {
 
-  const boomer = document.querySelector('.boomer-theme')
+  const large = document.querySelector('.large-theme')
 
-  boomer.addEventListener('click', event => {
-    document.body.classList.add("boomer-theme")
+  large.addEventListener('click', event => {
+    document.body.classList.add("large-theme")
     console.log('change to blue')
 
     for (let item of list) {
