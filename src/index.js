@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   logoutEventListener()
   searchEventListener()
   largeEventListener()
+  normalEventListener()
   // initUser()
 });
 
@@ -588,8 +589,6 @@ pink.addEventListener("click", event => {
 const changeThemeToBlue = () => {
   console.log("Blue")
 
-  document.body.classList.remove("large-theme")
-
   blueLogo.style.display = "block"
   pinkLogo.style.display = "none"
 
@@ -598,14 +597,11 @@ const changeThemeToBlue = () => {
   const list = document.getElementsByClassName('btn');
   for (let item of list) {
     item.style.background='lightblue'
-    item.classList.remove('large-button-text')
   }
 }
 
 const changeThemeToPink = () => {
   console.log("Pink")
-
-  document.body.classList.remove("large-theme")
 
   blueLogo.style.display = "none"
   pinkLogo.style.display = "block"
@@ -614,20 +610,31 @@ const changeThemeToPink = () => {
 
   for (let item of list) {
     item.style.background='lightpink'
-    item.classList.remove('large-button-text')
   }
 }
 
 function largeEventListener() {
-
   const large = document.querySelector('.large-theme')
 
   large.addEventListener('click', event => {
     document.body.classList.add("large-theme")
-    console.log('change to blue')
+    console.log('changed to large')
 
     for (let item of list) {
       item.classList.add('large-button-text')
+    }
+  })
+}
+
+function normalEventListener() {  
+  const normal = document.querySelector('.normal-theme')
+  
+  normal.addEventListener('click', event => {
+    document.body.classList.remove("large-theme")
+    console.log('changed to normal')
+
+    for (let item of list) {
+      item.classList.remove('large-button-text')
     }
   })
 }
