@@ -6,6 +6,7 @@ let loggedIn = false;
 
 const main = document.querySelector("main")
 const navBarLogin = document.querySelector('#navbar-login')
+const navBarHome = document.querySelector('#nav-home')
 const searchButton = document.querySelector('#user-search')
 
 // User Info Elements
@@ -142,6 +143,7 @@ const initUser = () => {
       newPostEventListener()
       document.querySelector('#login-form').remove()
       navBarLogin.firstElementChild.className = "nav-link"
+      navBarHome.className = "nav-link active"
       navBarLogin.firstElementChild.textContent = "Logout"
     })
 }
